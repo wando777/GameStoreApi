@@ -38,10 +38,10 @@ public class CategoriaResource {
 		return categoriaRepository.findAll();
 	}
 
-	@GetMapping("/{codigo}")
-	public ResponseEntity<?> buscarPeloCodigo(@PathVariable Long codigo) {
-		Optional<Categoria> id = categoriaRepository.findById(codigo);
-		return !id.isEmpty() ? ResponseEntity.ok(id) : ResponseEntity.notFound().build();
+	@GetMapping("/{id}")
+	public ResponseEntity<?> buscarPeloCodigo(@PathVariable Long id) {
+		Optional<Categoria> categoriaSalva = categoriaRepository.findById(id);
+		return !categoriaSalva.isEmpty() ? ResponseEntity.ok(categoriaSalva) : ResponseEntity.notFound().build();
 	}
 
 	@PostMapping

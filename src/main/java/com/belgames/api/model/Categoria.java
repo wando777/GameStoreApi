@@ -14,18 +14,18 @@ public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long codigo;
+	private long id;
 
 	@NotNull
 	@Size(min = 1, max = 50)
 	private String nome;
 
 	public long getCodigo() {
-		return codigo;
+		return id;
 	}
 
 	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+		this.id = codigo;
 	}
 
 	public String getNome() {
@@ -40,7 +40,7 @@ public class Categoria {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (codigo ^ (codigo >>> 32));
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -53,7 +53,7 @@ public class Categoria {
 		if (getClass() != obj.getClass())
 			return false;
 		Categoria other = (Categoria) obj;
-		if (codigo != other.codigo)
+		if (id != other.id)
 			return false;
 		return true;
 	}
