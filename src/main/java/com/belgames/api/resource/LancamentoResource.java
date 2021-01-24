@@ -3,6 +3,9 @@ package com.belgames.api.resource;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -19,40 +22,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.belgames.api.event.RecursoCriadoEvent;
-import com.belgames.api.model.Categoria;
-import com.belgames.api.repository.CategoriaRepository;
+import com.belgames.api.model.Lancamento;
+import com.belgames.api.repository.LancamentoRepository;
 
 @RestController
 @Validated
-@RequestMapping("/categorias")
-public class CategoriaResource {
+@RequestMapping("/lancamentos")
+public class LancamentoResource {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@Autowired
-	private CategoriaRepository categoriaRepository;
+	private LancamentoRepository lancamentoRepository;
 
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
 	@GetMapping
-	public List<Categoria> listar() {
-		return categoriaRepository.findAll();
+	public List<Lancamento> listar() {
+		List<Lancamento> lancamento = lancamentoRepository.findAll();
+		return lancamento;
 	}
-
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> buscarPeloId(@PathVariable Long id) {
-		Optional<Categoria> categoriaSalva = categoriaRepository.findById(id);
-		return !categoriaSalva.isEmpty() ? ResponseEntity.ok(categoriaSalva) : ResponseEntity.notFound().build();
+		Optional<Lancamento> lancamento = lancamentoRepository.findById(id);
+		return !lancamento.isEmpty() ? ResponseEntity.ok(lancamento) : ResponseEntity.notFound().build();
 	}
-
+	
 	@PostMapping
-	// @ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Categoria> criarCategoria(@Valid @RequestBody Categoria categoria,
-			HttpServletResponse response) {
-		Categoria categoriaSalva = categoriaRepository.save(categoria);
+	public ResponseEntity<Lancamento> criar(@Valid @RequestBody Lancamento lancamento, HttpServletResponse response) {
+		Lancamento lancamentoSalvo = lancamentoRepository.save(lancamento);
 
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, categoriaSalva.getId()));
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, lancamentoSalvo.getId()));
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
+		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
 	}
 
 }

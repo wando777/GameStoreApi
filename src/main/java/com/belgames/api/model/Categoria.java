@@ -20,12 +20,12 @@ public class Categoria {
 	@Size(min = 1, max = 50)
 	private String nome;
 
-	public long getCodigo() {
+	public long getId() {
 		return id;
 	}
 
-	public void setCodigo(long codigo) {
-		this.id = codigo;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
