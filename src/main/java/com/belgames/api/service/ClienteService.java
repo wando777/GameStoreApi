@@ -34,7 +34,7 @@ public class ClienteService {
 	/**
 	 * Encontra um cliente pelo ID.
 	 */
-	private Cliente encontrarCliente(long id) {
+	public Cliente encontrarCliente(long id) {
 		Optional<Cliente> clienteSalvo = clienteRepository.findById(id);
 
 		if (clienteSalvo.isEmpty()) {
