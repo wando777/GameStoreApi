@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -28,10 +27,6 @@ public class Cliente {
 	@Embedded
 	private Endereco endereco;
 
-	@JsonIgnore
-	@NotEmpty
-	private String password;
-
 	@NotNull
 	private boolean status;
 
@@ -39,15 +34,12 @@ public class Cliente {
 	 * @param id
 	 * @param nome
 	 * @param endereco
-	 * @param password
 	 * @param status
 	 */
-	public Cliente(long id, @NotNull @Size(min = 1, max = 50) String nome, Endereco endereco, @NotEmpty String password,
-			@NotNull boolean status) {
+	public Cliente(long id, @NotNull @Size(min = 1, max = 50) String nome, Endereco endereco, @NotNull boolean status) {
 		this.id = id;
 		this.nome = nome;
 		this.endereco = endereco;
-		this.password = password;
 		this.status = status;
 	}
 
@@ -81,14 +73,6 @@ public class Cliente {
 
 	public void setStatus(boolean status) {
 		this.status = status;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	@JsonIgnore
