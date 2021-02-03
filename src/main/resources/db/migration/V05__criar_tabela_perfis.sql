@@ -3,3 +3,5 @@ CREATE TABLE Perfis (
 	PERFIS VARCHAR(50) NOT NULL,
 	CONSTRAINT fk_perfil FOREIGN KEY (user_id) REFERENCES Users(id)
 );
+
+INSERT INTO Perfis (PERFIS, user_id) values ('ADMIN', 1);

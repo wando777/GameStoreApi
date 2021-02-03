@@ -35,11 +35,15 @@ public class ServerConfig extends WebSecurityConfigurerAdapter{
 	private UserDetailsService userDetailsService;
 	
 	private static final String[] PUBLIC_MATCHERS = {
+			"/login/**",
 			"/h2-console/**",
+			"/users/**",
+			"/users"
 	};
 	
 	private static final String[] PUBLIC_MATCHERS_GET = {
-			"/categorias/**"
+			"/categorias/**",
+			"/emails"
 	};
 	
 	@Override
